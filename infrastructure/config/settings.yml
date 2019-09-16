@@ -1,0 +1,7 @@
+db:
+  dbname: "douban"
+  host: "192.168.0.1"
+  port: "5432"
+  user: "user"
+  password: "******"
+  sslmode: "disable"

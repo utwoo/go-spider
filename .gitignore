@@ -15,4 +15,4 @@
 *.out
 
 # Configuration file
-*/settings.yml
+infrastructure/config/settings.yml

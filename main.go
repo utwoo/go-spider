@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
-	db.DB.AutoMigrate(&model.Book{})
+	db.DB.AutoMigrate(
+		&model.Book{},
+		&model.Process{},
+	)
 	defer db.DB.Close()
 }

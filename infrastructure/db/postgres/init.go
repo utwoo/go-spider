@@ -28,12 +28,12 @@ func InitializeDatabase() *gorm.DB {
 	password = viper.GetString("db.password")
 	host = viper.GetString("db.host")
 
-	connstr := fmt.Sprintf("host=%s user=%s dbname=%s port=%s sslmode=%s password=%s", host, user, dbName, port, sslMode, password)
-	fmt.Println(connstr)
+	connectString := fmt.Sprintf("host=%s user=%s dbname=%s port=%s sslmode=%s password=%s", host, user, dbName, port, sslMode, password)
+	fmt.Println(connectString)
 
 	connect, err := gorm.Open(
 		"postgres",
-		connstr,
+		connectString,
 	)
 	if err != nil {
 		fmt.Println(err)

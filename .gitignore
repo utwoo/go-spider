@@ -16,3 +16,6 @@
 
 # Configuration file
 infrastructure/config/settings.yml
+
+# Goland configuation files
+.idea/

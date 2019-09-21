@@ -1,7 +1,7 @@
 db:
   dbname: "douban"
-  host: "192.168.0.1"
+  host: "47.96.126.127"
   port: "5432"
-  user: "user"
-  password: "******"
+  user: "postgres"
+  password: P@ssw0rd
   sslmode: "disable"

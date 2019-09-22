@@ -7,10 +7,12 @@ import (
 )
 
 var (
-	// BookRootURL presents the root url of douban books
+	// BookRootURL presents the root url of DouBan books
 	BookRootURL = "https://book.douban.com"
-	// BookTagURL presents the tags of books
-	BookTagURL = fmt.Sprintf("%s/tag/?view=cloud", BookRootURL)
+	// BookTagByCloudURL presents the tags of books
+	BookTagByCloudURL = fmt.Sprintf("%s/tag/?view=cloud", BookRootURL)
+	// BookTagByType presents the tags of books
+	BookTagByTypeURL = fmt.Sprintf("%s/tag/?view=type", BookRootURL)
 )
 
 func init() {

@@ -15,7 +15,7 @@ func TagProcessPhase(doc *goquery.Document) {
 		processes := model.TagProcess{
 			TagName:    tagName,
 			TagURL:     tagURL,
-			StartIndex: 1,
+			StartIndex: 0,
 			Finished:   "N",
 		}
 

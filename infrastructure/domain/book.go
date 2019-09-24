@@ -12,17 +12,23 @@ import (
 	"utwoo.com/go-spider/infrastructure/model"
 )
 
-func SaveBooksByTagTypePagePhase(doc *goquery.Document) {
-	doc.Find(".subject-item").Each(func(i int, selection *goquery.Selection) {
-		bookURL, _ := selection.Find(".info a").Attr("href")
-		// Get book information in book page
-		document, _ := download.Downloader(bookURL)
-		sid := regexp.MustCompile(`[\d]+`).FindString(bookURL)
-		SaveBookInfoByURL(sid, document)
-	})
+func SaveBooksPerTagTypePage(doc *goquery.Document) int {
+	result := doc.Find("#subject_list .subject-list .subject-item")
+
+	if result.Length() > 0 {
+		result.Each(func(i int, selection *goquery.Selection) {
+			bookURL := selection.Find(".info a").AttrOr("href", "")
+			// Save book information in book page
+			document, _ := download.Downloader(bookURL)
+			sid := regexp.MustCompile(`[\d]+`).FindString(bookURL)
+			SaveBookInfo(sid, document)
+		})
+	}
+
+	return result.Length()
 }
 
-func SaveBookInfoByURL(sid string, doc *goquery.Document) {
+func SaveBookInfo(sid string, doc *goquery.Document) {
 	bookInfo := model.Book{SID: sid}
 	db.DB.Where(&model.Book{SID: sid}).Find(&bookInfo)
 

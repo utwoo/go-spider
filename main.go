@@ -31,11 +31,21 @@ func InitializeTagProcessInfo() {
 }
 
 func PushBooks() {
-	// Get incomplete tag
 	tagProcess := model.TagProcess{}
-	db.DB.Where("finished = 'N'").First(&tagProcess)
-	// Get books information in tag page
-	tagURL := fmt.Sprintf("%s%s?start=%d&type=T", config.BookRootURL, tagProcess.TagURL, tagProcess.StartIndex)
-	document, _ := download.Downloader(tagURL)
-	domain.SaveBooksByTagTypePagePhase(document)
+
+	for {
+		// Get incomplete tag
+		db.DB.Where("finished = 'N'").First(&tagProcess)
+		// Get books information in tag page
+		tagURL := fmt.Sprintf("%s%s?start=%d&type=T", config.BookRootURL, tagProcess.TagURL, tagProcess.StartIndex)
+		document, _ := download.Downloader(tagURL)
+		result := domain.SaveBooksPerTagTypePage(document)
+
+		if result == 0 {
+			tagProcess.Finished = "Y"
+		}
+
+		tagProcess.StartIndex += result
+		db.DB.Save(&tagProcess)
+	}
 }

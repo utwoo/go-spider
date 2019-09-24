@@ -10,7 +10,7 @@ import (
 func TagProcessPhase(doc *goquery.Document) {
 	doc.Find(".tagCol td").Each(func(i int, selection *goquery.Selection) {
 		tagName := adapter.ToString(selection.Find("a").Text())
-		tagURL, _ := selection.Find("a").Attr("href")
+		tagURL := selection.Find("a").AttrOr("href", "")
 
 		processes := model.TagProcess{
 			TagName:    tagName,
